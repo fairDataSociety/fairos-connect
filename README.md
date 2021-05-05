@@ -8,11 +8,15 @@ Install the package `yarn add fairdrive-protocol`
 
 If you clone this repo, make sure to link this project to your project:
 
-1. Inside fairdrive-protocol type in `yarn link`
+1. First inside fairdrive-protocol run `yarn`
 
-2. Go to your project and run this command `yarn link "fairdrive-protocol"`
+2. After all the packages are installed run `yarn run build:package`
 
-3. And run this command `npm link ../../fairdrive-protocol/node_modules/react`
+3. To link the package locally run `yarn link`
+
+4. Go to your project and run this command `yarn link "fairdrive-protocol"`
+
+5. And run this command `npm link ../../fairdrive-protocol/node_modules/react`
 
 the ../../ is path to where you have cloned fairdrive-protocol repo.
 

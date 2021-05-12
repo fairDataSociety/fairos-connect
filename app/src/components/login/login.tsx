@@ -3,6 +3,8 @@ import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
 import useStyles from "./loginStyles";
 import { login } from "../../store/services/fairOS";
+import TextField from "../textField/textField";
+
 import Button from "./../button/button";
 export interface Props {
   setUserPassword?: any;
@@ -64,27 +66,22 @@ function Login(props: Props) {
       <div className={classes.title}>Connect with Fairdrive</div>
       <div className={classes.flexer}></div>
 
-      <div className={classes.dialogPasswordBox}>
-        <input
-          id="username"
-          className={classes.dialogPassword}
-          type="text"
-          placeholder="Username"
-          onKeyPress={(e) => handleSubmit(e)}
-          onChange={(e) => handleSetUsername(e)}
-        ></input>
-      </div>
+      <TextField
+        placeholder="Username"
+        type="text"
+        setHasError={setHasError}
+        setProp={setUsername}
+        onContinue={onLogin}
+      ></TextField>
 
-      <div className={classes.dialogPasswordBox}>
-        <input
-          id="password"
-          className={classes.dialogPassword}
-          type="password"
-          placeholder="Password"
-          onKeyPress={(e) => handleSubmit(e)}
-          onChange={(e) => handleSetPassword(e)}
-        ></input>
-      </div>
+      <TextField
+        placeholder="Password"
+        type="password"
+        setHasError={setHasError}
+        setProp={setPassword}
+        onContinue={onLogin}
+      ></TextField>
+
       {hasError ? <div className={classes.errormsg}>Could not login.</div> : ""}
       <Button text={"Continue"} clickFunction={onLogin}></Button>
     </div>

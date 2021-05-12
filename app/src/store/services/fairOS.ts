@@ -12,8 +12,7 @@ interface Payload {
 }
 
 const host ="https://api.fairos.io/v0/";
-// const podName = process.env.REACT_APP_NAME;
-const podName = "Fairdrive";
+const podName = process.env.REACT_APP_NAME;
 export const login = async (payload: Payload) => {
   try {
    const {username, password} = payload;
@@ -132,7 +131,7 @@ export const fileUpload = async (fileData: any) => {
   let formData = new FormData();
   var file = new File([fileData.file], fileData.filename);
   formData.append("files", file);
-  formData.append("pod_dir", "/Documents" );
+  formData.append("pod_dir", "/" );
   formData.append("block_size", "64Mb");
   const uploadFiles = await axios({
     baseURL: host,
@@ -190,6 +189,22 @@ export const fileDownload = async (file:any, filename:any) => {
   }
 }
 
+export const filePreview = async (file:any, filename:any) => {
+  try {
+    const downloadFile = await axios({
+      baseURL: host,
+      method: "POST",
+      url: "file/download",
+      data: qs.stringify({ file: file }),
+      responseType: "blob",
+      withCredentials: true,
+    });
+
+    return downloadFile.data;
+  } catch (error) {
+    throw error;
+  }
+}
 export const getDirectory = async (payload: Payload) => {
   const {directory, password, podName} = payload;
   try {

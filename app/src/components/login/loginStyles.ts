@@ -28,32 +28,6 @@ const useStyles = makeStyles(() =>
       justifyItems: "center",
       alignItems: "center",
     },
-    dialogPasswordBox: {
-      width: "75vw",
-      display: "flex",
-      flexDirection: "column",
-      placeItems: "center center",
-      marginBottom: '40px',
-      color:"#16181D",
-
-    },
-    dialogPassword: {
-      // from bodyDefault in Fairdrive:
-      fontFamily: 'Work Sans',
-      fontWeight: 'normal', //TODO can this be thinner???
-      fontSize: '20px',
-      letterSpacing: '0',
-      lineHeight: '19px',
-      // custom
-      width: "205px",
-      textAlign: 'left',
-      paddingBottom: '5px',
-      border: "0px",
-      borderBottom: "1px solid #16181D",
-      backgroundColor: "transparent",
-      color:"#16181D",
-      outline: 'none',
-    },
     errormsg: {
       // from bodyBold in Fairdrive:
       fontFamily: 'Work Sans',

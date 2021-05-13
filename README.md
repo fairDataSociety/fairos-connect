@@ -1,4 +1,4 @@
-# Fairdrive Connect
+# Fairdrive Protocol
 
 This is React component modal which will be used as a proxy for connecting on swarm network using FairOS and Fairdrive Connect.
 

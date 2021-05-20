@@ -11,7 +11,7 @@ interface Payload {
 }
 
 const host ="https://api.fairos.io/v0/";
-const podName = process.env.REACT_APP_NAME;
+const podName = "Fairdrive";
 export const login = async (payload: Payload) => {
   try {
    const {username, password} = payload;

@@ -15,7 +15,7 @@ If you clone this repo, make sure to link this project to your project:
 
 4. Go to your project and run this command `yarn link "fairdrive-protocol"`
 
-5. And run this command `npm link ../../fairdrive-protocol/node_modules/react`
+5. And run this command `npm link ../../fairdrive-protocol/app/node_modules/react`
 
 the ../../ is path to where you have cloned fairdrive-protocol repo.
 

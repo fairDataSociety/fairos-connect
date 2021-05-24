@@ -1,8 +1,7 @@
 # Fairdrive Protocol
 
 This is React component modal which will be used as a proxy for connecting on swarm network using FairOS and Fairdrive Connect.
-# It has not yet been published
-Install the package `yarn add fairdrive-protocol`
+
 
 ## Running the repo and installing package locally
 

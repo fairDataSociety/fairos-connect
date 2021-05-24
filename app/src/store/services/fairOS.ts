@@ -62,7 +62,7 @@ export const createPod = async(password: string) =>{
     baseURL: host,
     method: "POST",
     url: "pod/new",
-    data: qs.stringify({pod: podName }),
+    data: qs.stringify({pod: podName, password: password }),
     withCredentials: true,
   });
   return true;

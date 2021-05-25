@@ -5,7 +5,7 @@ import useStyles from "./loginStyles";
 import { login } from "../../store/services/fairOS";
 import TextField from "../textField/textField";
 
-import Button from "./../button/button";
+import ButtonPill from "./../buttonPill/buttonPill";
 export interface Props {
   setUserPassword?: any;
   password?: string;
@@ -63,8 +63,9 @@ function Login(props: Props) {
 
   return (
     <div className={classes.dialogBox}>
-      <div className={classes.title}>Connect with Fairdrive</div>
-      <div className={classes.flexer}></div>
+      <div className={classes.header}>
+        <div className={classes.title}>Account Credentials</div>
+      </div>
 
       <TextField
         placeholder="Username"
@@ -83,7 +84,7 @@ function Login(props: Props) {
       ></TextField>
 
       {hasError ? <div className={classes.errormsg}>Could not login.</div> : ""}
-      <Button text={"Continue"} clickFunction={onLogin}></Button>
+      <ButtonPill text={"Continue"} clickFunction={onLogin}></ButtonPill>
     </div>
   );
 }

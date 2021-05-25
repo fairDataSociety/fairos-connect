@@ -10,6 +10,7 @@ import { ThemeProvider } from "./store/themeContext/themeContext";
 import UploadFile from "./components/uploadFile/uploadFile";
 import ListFiles from "./components/listFiles/listFiles";
 import LoadFiles from "./components/loadFiles/loadFiles";
+import NewFolder from "./components/newFolder/newFolder";
 // export * as services from "./store/services/fairOS";
 ReactDOM.render(<App />, document.getElementById("root"));
 
@@ -30,6 +31,15 @@ export const UploadFileComponent = (props: Props) => {
     <StoreProvider>
       <ThemeProvider>
         <UploadFile file={props.file} setUploadRes={props.setUploadRes} />
+      </ThemeProvider>
+    </StoreProvider>
+  );
+};
+export const CreateNewFolder = (props: Props) => {
+  return (
+    <StoreProvider>
+      <ThemeProvider>
+        <NewFolder setResponse={props.setUploadRes} />
       </ThemeProvider>
     </StoreProvider>
   );

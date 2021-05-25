@@ -1,16 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
-import useStyles from "./buttonStyles";
-import { setEmitFlags } from "typescript";
+import useStyles from "./buttonPillStyles";
 
 export interface Props {
   clickFunction: any;
   text: string;
   setFiles?: any;
+  color?: string;
+  textColor?: string;
 }
 
-function Button(props: Props) {
+function ButtonPill(props: Props) {
   const { state, actions } = useContext(StoreContext);
   const { theme } = useContext(ThemeContext);
   const { text, clickFunction } = props;
@@ -22,11 +23,9 @@ function Button(props: Props) {
   }, [state.entries]);
   return (
     <div className={classes.button} onClick={clickFunction}>
-      <div>
-        <div className={classes.buttontext}>{text}</div>
-      </div>
+      {text}
     </div>
   );
 }
 
-export default React.memo(Button);
+export default React.memo(ButtonPill);

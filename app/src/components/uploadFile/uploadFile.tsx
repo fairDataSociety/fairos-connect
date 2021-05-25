@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
-import Button from "./../button/button";
+import CreateNew from "../createNew/createNew";
+
 import useStyles from "./uploadFileStyles";
 
 export interface Props {
@@ -38,19 +39,13 @@ function ShareFile(props: Props) {
     }
   };
   return (
-    <div className={classes.dialogBox}>
-      <div className={classes.title}>Save file</div>
-      <div className={classes.flexer}></div>
-      <input
-        id="username"
-        className={classes.dialogText}
-        type="text"
-        placeholder="File name"
-        onKeyPress={(e) => handleSubmit(e)}
-        onChange={(e) => handleSetFilename(e)}
-      ></input>
-      <div className={classes.flexer}></div>
-      <Button text={"Save file"} clickFunction={shareFile}></Button>
+    <div>
+      <CreateNew
+        onClick={shareFile}
+        setProp={setFilename}
+        title="New File"
+        label="File Name"
+      ></CreateNew>
     </div>
   );
 }

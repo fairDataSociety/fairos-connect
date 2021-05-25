@@ -2,7 +2,6 @@
 
 This is React component modal which will be used as a proxy for connecting on swarm network using FairOS and Fairdrive Protocol.
 
-
 ## Running the repo and installing package locally
 
 If you clone this repo, make sure to link this project to your project:
@@ -72,3 +71,11 @@ After you loaded the files call up on this component and create state for specif
 `const [file, setFile] = useState(null)`
 
 ` <ListFilesComponent password={password} files={files} setFile={setFile} ></ListFilesComponent>`
+
+## Create new Folder
+
+To create new folder inside your storage, import CreateNewFolder component and add state for response when directory has been created
+
+`const [folderCreated, setFolderCreated] = useState(false);`
+
+` <CreateNewFolder setResponse={setCreateFolderResponse} ></ListFilesComponent>`

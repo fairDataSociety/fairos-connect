@@ -5,28 +5,23 @@ import { Props } from "./uploadFile";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    flexer: {
-      margin: "40px",
-    },
     dialogBox: {
-      backgroundColor: (style: Props & Theme) => style.background1,
-      width: "500px",
-      height: "500px",
+      backgroundColor: (style: Props & Theme) => style.backgroundDark,
+      width: "70rem",
+      height: "20rem",
       display: "flex",
       flexDirection: "column",
       justifyItems: "center",
       alignItems: "center",
+      padding:"2rem",
+      marginBottom:"2rem"
     },
     title: {
-      margin: "20px",
-      fontFamily: 'Work Sans',
-      fontWeight: 'bold',
-      fontSize: '34px',
-      letterSpacing: '0',
-      lineHeight: '36px',
-      marginBottom: '20px',
-      color: '#16181D',
-      textAlign: 'center',
+      alignItems: "left",
+      font:(style: Props & Theme) => style.typography.h2,
+      color:(style: Props & Theme) => style.textColorMain,
+      borderBottom: "1px solid var(--grey)",
+      marginBottom:"2rem"
     },
     dialogText: {
       // from bodyDefault in Fairdrive:

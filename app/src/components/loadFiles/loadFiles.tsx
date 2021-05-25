@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
 import useStyles from "./loadFilesStyles";
-import Button from "../button/button";
+import ButtonPill from "../buttonPill/buttonPill";
 
 export interface Props {
   setFiles: any;
@@ -26,11 +26,11 @@ function LoadFiles(props: Props) {
     }
   }
   return (
-    <Button
+    <ButtonPill
       text={"Load Files"}
       setFiles={props.setFiles}
       clickFunction={getDirectory}
-    ></Button>
+    ></ButtonPill>
   );
 }
 

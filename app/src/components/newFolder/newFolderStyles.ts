@@ -1,21 +1,14 @@
 import { makeStyles, createStyles } from "@material-ui/styles";
 // import interface for component Props and Theme
 import { Theme } from "../../store/themeContext/themes";
-import { Props } from "./listFiles";
+import { Props } from "./newFolder";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    ListFiles: {
+    BoilerPlate: {
       // we merge Props & Theme interfaces and call this merged object "style".
       //component props and ui theme properties are available on the style object (yay auto-complete!!).
-      backgroundColor: (style: Props & Theme) => style.backgroundDark,
-      width: "45rem",
-      height: "30rem",
-      display: "flex",
-      flexDirection: "column",
-      justifyItems: "center",
-      alignItems: "center",
-      overflow:"auto"
+      // backgroundColor: (style: Props & Theme) => style.background1,
     },
   })
 );

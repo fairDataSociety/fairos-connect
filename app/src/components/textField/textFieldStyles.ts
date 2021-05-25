@@ -6,29 +6,25 @@ import { Props } from "./textField";
 const useStyles = makeStyles(() =>
   createStyles({
     TextField: {
-      width: "75vw",
       display: "flex",
+      background: ' #EEF0FF',
       flexDirection: "column",
-      placeItems: "center center",
-      marginBottom: '40px',
+      placeItems: "center",
+      backgroundColor: (style: Props & Theme) => style.backgroundShade2,
+      paddingBottom: '1rem',
+      border: "1px solid var(--black)",
+      borderRadius:"1rem",
+      marginBottom:"2.5rem",
+      textAlign: 'left',
+      padding:"1rem",
       color:"#16181D",
     },
     input: {
-      // from bodyDefault in Fairdrive:
-      fontFamily: 'Work Sans',
-      fontWeight: 'normal', //TODO can this be thinner???
-      fontSize: '20px',
-      letterSpacing: '0',
-      lineHeight: '19px',
-      // custom
-      width: "205px",
-      textAlign: 'left',
-      paddingBottom: '5px',
-      border: "0px",
-      borderBottom: "1px solid #16181D",
-      backgroundColor: "transparent",
-      color:"#16181D",
+      width:"40rem",
+      height:"2.5rem",
+      color:(style: Props & Theme) => style.textColorMain,
       outline: 'none',
+      backgroundColor: (style: Props & Theme) => style.backgroundShade2,
     },
   })
 );

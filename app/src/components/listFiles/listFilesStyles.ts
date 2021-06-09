@@ -8,14 +8,18 @@ const useStyles = makeStyles(() =>
     ListFiles: {
       // we merge Props & Theme interfaces and call this merged object "style".
       //component props and ui theme properties are available on the style object (yay auto-complete!!).
-      backgroundColor: (style: Props & Theme) => style.backgroundDark,
-      width: "45rem",
-      height: "30rem",
+      // backgroundColor: (style: Props & Theme) => style.backgroundDark,
+      width: "55rem",
+      height: "50rem",
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "row",
       justifyItems: "center",
       alignItems: "center",
-      overflow:"auto"
+      overflow: "auto",
+      flexWrap: "wrap",
+    },
+    grid: {
+      display: "flex",
     },
   })
 );

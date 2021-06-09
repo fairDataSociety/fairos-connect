@@ -5,41 +5,30 @@ import { Props } from "./uploadFile";
 
 const useStyles = makeStyles(() =>
   createStyles({
-    dialogBox: {
+    NewCard: {
+      // we merge Props & Theme interfaces and call this merged object "style".
+      //component props and ui theme properties are available on the style object (yay auto-complete!!).
       backgroundColor: (style: Props & Theme) => style.backgroundDark,
-      width: "70rem",
-      height: "20rem",
+      width:"50rem",
+      height:"35rem",
       display: "flex",
       flexDirection: "column",
-      justifyItems: "center",
-      alignItems: "center",
-      padding:"2rem",
-      marginBottom:"2rem"
+      padding:"2.5rem",
+      marginBottom:"1rem",
+      textAlign:"center"
     },
-    title: {
+    Title:{
       alignItems: "left",
-      font:(style: Props & Theme) => style.typography.h2,
-      color:(style: Props & Theme) => style.textColorMain,
-      borderBottom: "1px solid var(--grey)",
-      marginBottom:"2rem"
+      font:(style: Props & Theme) => style.typography.h5,
+      color:(style: Props & Theme) => style.textColorPrimary,
+      borderBottom: "1px solid var(--grey)"
     },
-    dialogText: {
-      // from bodyDefault in Fairdrive:
-      fontFamily: 'Work Sans',
-      fontWeight: 'normal', //TODO can this be thinner???
-      fontSize: '20px',
-      letterSpacing: '0',
-      lineHeight: '19px',
-      // custom
-      width: "205px",
-      textAlign: 'left',
-      paddingBottom: '5px',
-      border: "0px",
-      borderBottom: "1px solid #16181D",
-      backgroundColor: "transparent",
-      color:"#16181D",
-      outline: 'none',
-    },
+    Body:{
+      margin: '5rem 0 0 0',
+      font:(style: Props & Theme) => style.typography.body1,
+      color:(style: Props & Theme) => style.textColorPrimary,
+
+    }
   })
 );
 

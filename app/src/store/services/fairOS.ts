@@ -1,40 +1,18 @@
 import axios from "axios";
 import qs from "querystring";
 import FileSaver from "file-saver";
-import urlPath from '../helpers/urlPath';
+import { create } from 'node:domain';
+
 interface Payload {
   username?: string;
   password?: string;
   podName?: string;
   file?: any;
   directory?: string;
-  files?:any;
 }
 
 const host ="https://api.fairos.io/v0/";
-const podName = "Fairdrive";
-
-export async function createAccount(username: string, password: any, mnemonic: string) {
-  try {
-    const requestBody = {
-      user: username,
-      password: password,
-      mnemonic: mnemonic,
-    };
-
-    const response = await axios({
-      baseURL: host,
-      method: "POST",
-      url: "user/signup",
-      data: qs.stringify(requestBody),
-      withCredentials: true,
-    });
-    return response.data;
-  } catch (e) {
-    console.log("error on timeout", e);
-  }
-}
-
+const podName = process.env.REACT_APP_NAME;
 export const login = async (payload: Payload) => {
   try {
    const {username, password} = payload;
@@ -167,20 +145,12 @@ export const fileUpload = async (fileData: any) => {
 }
 
 
-// export const fileUpload = async (payload:Payload) => {
-//   const {files, directory} = payload;
-//   // const newPath = writePath(path);
-//   let writePath = "";
-//   if (directory == "root") {
-//     writePath = "/";
-//   } else {
-//     writePath = "/" + urlPath(directory);
-//   }
+// export const fileUpload = async (files:any, directory:any, onUploadProgress:any) => {
 //   const formData = new FormData();
 //   for (const file of files) {
 //     formData.append("files", file);
 //   }
-//   formData.append("pod_dir", writePath);
+//   formData.append("pod_dir", "/" + directory);
 //   formData.append("block_size", "64Mb");
 
 //   const uploadFiles = await axios({
@@ -189,6 +159,9 @@ export const fileUpload = async (fileData: any) => {
 //     url: "file/upload",
 //     data: formData,
 //     withCredentials: true,
+//     onUploadProgress: function (event) {
+//       onUploadProgress(event.loaded, event.total);
+//     },
 //   });
 
 //   console.log(uploadFiles);
@@ -226,12 +199,12 @@ export const filePreview = async (file:any, filename:any) => {
       responseType: "blob",
       withCredentials: true,
     });
+
     return downloadFile.data;
   } catch (error) {
     throw error;
   }
 }
-
 export const getDirectory = async (payload: Payload) => {
   const {directory, password, podName} = payload;
   try {
@@ -303,21 +276,6 @@ export const storeAvatar = async (avatar:any) => {
     console.log("error on timeout", e);
   }
 }
-export async function createDirectory(directoryName: string) {
-  // Dir = "/" + path + "/"
-  try {
-    const createDirectory = await axios({
-      baseURL: host,
-      method: "POST",
-      url: "dir/mkdir",
-      data: qs.stringify({ dir: directoryName }),
-      withCredentials: true,
-    });
-
-    return true;
-  } catch (error) {}
-}
-
 
 async function readAsbase64(blob:any) {
   const tempFileReader = new FileReader();

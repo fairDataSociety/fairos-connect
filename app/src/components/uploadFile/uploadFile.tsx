@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
-import CreateNew from "../createNew/createNew";
-
+import ButtonPill from "../buttonPill/buttonPill";
 import useStyles from "./uploadFileStyles";
+import TextField from "../textField/textField";
 
 export interface Props {
   file: any;
@@ -30,22 +30,26 @@ function ShareFile(props: Props) {
 
   const shareFile = async () => {
     try {
-      await actions.sendFile({
-        file: props.file,
-        filename: filename,
-      });
+      // await actions.sendFile({
+      //   file: props.file,
+      //   filename: filename,
+      // });
     } catch (e) {
       console.log(e);
     }
   };
   return (
-    <div>
-      <CreateNew
-        onClick={shareFile}
-        setProp={setFilename}
-        title="New File"
-        label="File Name"
-      ></CreateNew>
+    <div className={classes.NewCard}>
+      <div className={classes.Title}>Save file</div>
+      <div className={classes.Body}>
+        <TextField
+          placeholder="File name"
+          type="text"
+          setProp={setFilename}
+          onContinue={shareFile}
+        ></TextField>
+        <ButtonPill text={"Save file"} clickFunction={shareFile}></ButtonPill>
+      </div>
     </div>
   );
 }

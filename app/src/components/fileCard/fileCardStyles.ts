@@ -9,14 +9,14 @@ const useStyles = makeStyles(() =>
       // we merge Props & Theme interfaces and call this merged object "style".
       //component props and ui theme properties are available on the style object (yay auto-complete!!).
 
-        backgroundColor:"#88898E",
-        width: "45rem",
-        height: "5rem",
+        backgroundColor:(style: Theme & Props) => style.backgroundLight3,
+        width: "55rem",
+        height: "7rem",
         display: "flex",
         flexDirection: "row",
         justifyItems: "center",
         alignItems: "center",
-        color: "#EEF0FF",
+        color: (style: Theme & Props) => style.textColorPrimary,
         border: "1px solid #CED0DD",
         boxSizing: "border-box",
         borderRadius: "8px",
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
     },
     fileName:{
       marginRight:"1rem",
-      font: (style: Theme & Props) => style.typography.p1,
+      font: (style: Theme & Props) => style.typography.body1,
     },
     fileSize:{
       marginRight:"1rem",

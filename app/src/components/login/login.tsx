@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
 import useStyles from "./loginStyles";
-import { login } from "../../store/services/fairOS";
+import ButtonPill from "../buttonPill/buttonPill";
 import TextField from "../textField/textField";
-
-import ButtonPill from "./../buttonPill/buttonPill";
 export interface Props {
   setUserPassword?: any;
   password?: string;
@@ -26,7 +24,6 @@ function Login(props: Props) {
   const [password, setPassword] = useState("");
 
   const [hasError, setHasError] = useState(false);
-
   const handleSetUsername = (e: any) => {
     setUsername(e.target.value);
     setHasError(false);
@@ -51,20 +48,17 @@ function Login(props: Props) {
   }, [state.userData]);
 
   async function onLogin() {
-    // TODO can look at logic from Fairdrive
-    // TODO get API calls for this
-    const data = await actions.userLogin({
+    await actions.userLogin({
       username,
       password,
       podName: "Fairdrive",
     });
-    // setHasError(true);
   }
 
   return (
-    <div className={classes.dialogBox}>
+    <div className={classes.Login}>
       <div className={classes.header}>
-        <div className={classes.title}>Account Credentials</div>
+        <div className={classes.title}>Fairdrive Credentials</div>
       </div>
 
       <TextField
@@ -82,9 +76,10 @@ function Login(props: Props) {
         setProp={setPassword}
         onContinue={onLogin}
       ></TextField>
+      <div className={classes.flexer}></div>
 
       {hasError ? <div className={classes.errormsg}>Could not login.</div> : ""}
-      <ButtonPill text={"Continue"} clickFunction={onLogin}></ButtonPill>
+      <ButtonPill text={"Login"} clickFunction={onLogin}></ButtonPill>
     </div>
   );
 }

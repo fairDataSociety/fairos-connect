@@ -10,21 +10,22 @@ const useStyles = makeStyles(() =>
       //component props and ui theme properties are available on the style object (yay auto-complete!!).
       backgroundColor: (style: Props & Theme) => style.backgroundDark,
       width:"50rem",
-      height:"30rem",
+      height:"35rem",
       display: "flex",
       flexDirection: "column",
-      padding:"2.5rem"
+      padding:"2.5rem",
+      marginBottom:"1rem"
     },
     Title:{
       alignItems: "left",
-      font:(style: Props & Theme) => style.typography.h2,
-      color:(style: Props & Theme) => style.textColorMain,
+      font:(style: Props & Theme) => style.typography.h5,
+      color:(style: Props & Theme) => style.textColorPrimary,
       borderBottom: "1px solid var(--grey)"
     },
     Body:{
       margin: '5rem 0 0 0',
-      font:(style: Props & Theme) => style.typography.p1,
-      color:(style: Props & Theme) => style.textColorMain,
+      font:(style: Props & Theme) => style.typography.body1,
+      color:(style: Props & Theme) => style.textColorPrimary,
 
     }
   })

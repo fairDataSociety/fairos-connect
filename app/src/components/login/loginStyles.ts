@@ -6,7 +6,6 @@ import { Props } from "./login";
 const useStyles = makeStyles(() =>
   createStyles({
     Login: {
-      backgroundColor: (style: Props & Theme) => style.backgroundDark,
       height: "50rem",
       width:"50rem",
       display: "flex",

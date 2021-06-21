@@ -30,10 +30,12 @@ function ShareFile(props: Props) {
 
   const shareFile = async () => {
     try {
-      // await actions.sendFile({
-      //   file: props.file,
-      //   filename: filename,
-      // });
+      await actions.uploadFile({
+        file: props.file,
+        filename: filename,
+        directory: "root",
+        podName: "Fairdrive",
+      });
     } catch (e) {
       console.log(e);
     }

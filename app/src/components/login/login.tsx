@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
 import useStyles from "./loginStyles";
-import ButtonPill from "../buttonPill/buttonPill";
-import TextField from "../textField/textField";
+import ConnectToFairdrive from "../modals/connectToFairdrive/connectToFairdrive";
+
 export interface Props {
   setUserPassword?: any;
   password?: string;
@@ -57,29 +57,10 @@ function Login(props: Props) {
 
   return (
     <div className={classes.Login}>
-      <div className={classes.header}>
-        <div className={classes.title}>Fairdrive Credentials</div>
-      </div>
-
-      <TextField
-        placeholder="Username"
-        type="text"
-        setHasError={setHasError}
-        setProp={setUsername}
-        onContinue={onLogin}
-      ></TextField>
-
-      <TextField
-        placeholder="Password"
-        type="password"
-        setHasError={setHasError}
-        setProp={setPassword}
-        onContinue={onLogin}
-      ></TextField>
-      <div className={classes.flexer}></div>
-
-      {hasError ? <div className={classes.errormsg}>Could not login.</div> : ""}
-      <ButtonPill text={"Login"} clickFunction={onLogin}></ButtonPill>
+      <ConnectToFairdrive
+        setUsername={setUsername}
+        setPassword={props.setUserPassword}
+      ></ConnectToFairdrive>
     </div>
   );
 }

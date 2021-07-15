@@ -13,6 +13,7 @@ export interface Props {
   files?: any;
   setUploadRes?: any;
   podName?: string;
+  className?: any;
 }
 
 function Login(props: Props) {
@@ -56,7 +57,7 @@ function Login(props: Props) {
   }
 
   return (
-    <div className={classes.Login}>
+    <div className={props.className}>
       <ConnectToFairdrive
         setUsername={setUsername}
         setPassword={props.setUserPassword}

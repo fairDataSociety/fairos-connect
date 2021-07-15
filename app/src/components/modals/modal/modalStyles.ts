@@ -8,7 +8,7 @@ const useStyles = makeStyles(() =>
       backgroundColor: (style: Props & Theme) => style.backgroundDark3,
       border: (style: Props & Theme) => `1px solid ${style.backgroundDark2}`,
       color: (style: Props & Theme) => style.backgroundWhite,
-      width: "50rem",
+      width: "70rem",
       minHeight: "25rem",
       display: "flex",
       flexDirection: "column",

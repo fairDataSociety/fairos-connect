@@ -25,13 +25,12 @@ function LoadFiles(props: Props) {
       console.log(e);
     }
   }
-  return (
-    <ButtonPill
-      text={"Load Files"}
-      setFiles={props.setFiles}
-      clickFunction={getDirectory}
-    ></ButtonPill>
-  );
+  useEffect(() => {
+    if (props.setFiles) {
+      props.setFiles(state.entries);
+    }
+  }, [state.entries]);
+  return <div onClick={getDirectory}>Load files</div>;
 }
 
 export default React.memo(LoadFiles);

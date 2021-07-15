@@ -6,8 +6,6 @@ import { Props } from "./login";
 const useStyles = makeStyles(() =>
   createStyles({
     Login: {
-      height: "50rem",
-      width:"50rem",
       display: "flex",
       flexDirection: "column",
       justifyItems: "center",

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
 import { StoreContext } from "../../store/store";
+import CardGrid from "../cardGrid/cardGrid";
+import FileCard from "../cards/fileCard";
 import useStyles from "./listFilesStyles";
-import FileCard from "../fileCard/fileCard";
 export interface Props {
   password: string;
   files: any;

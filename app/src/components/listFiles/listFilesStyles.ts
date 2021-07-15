@@ -9,8 +9,7 @@ const useStyles = makeStyles(() =>
       // we merge Props & Theme interfaces and call this merged object "style".
       //component props and ui theme properties are available on the style object (yay auto-complete!!).
       // backgroundColor: (style: Props & Theme) => style.backgroundDark,
-      width: "55rem",
-      height: "50rem",
+
       display: "flex",
       flexDirection: "row",
       justifyItems: "center",
@@ -18,6 +17,10 @@ const useStyles = makeStyles(() =>
       overflow: "auto",
       flexWrap: "wrap",
     },
+    cardGrid: {
+			width: '100%',
+			height: '100%',
+		},
     grid: {
       display: "flex",
     },

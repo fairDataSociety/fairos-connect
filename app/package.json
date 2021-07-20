@@ -1,6 +1,6 @@
 {
-  "name": "fairdrive-protocol",
-  "version": "0.0.1",
+  "name": "fd-t-p",
+  "version": "0.0.2",
   "description": "Linum Labs Internal Boilerplate",
   "author": "Mustafa Mahmutovic",
   "license": "MIT",

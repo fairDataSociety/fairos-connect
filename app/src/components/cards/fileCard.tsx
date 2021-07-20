@@ -15,6 +15,7 @@ export interface Props {
   file: any;
   isDirectory?: boolean;
   setFile?: any;
+  podName?: string;
 }
 
 function FileCard(props: Props) {
@@ -56,9 +57,13 @@ function FileCard(props: Props) {
     }
   }, [file]);
   const downloadFile = async () => {
-    const file = await filePreview(props.file.name, "root", "Home").catch((e) =>
-      console.error(e)
-    );
+    console.log(props.podName);
+    debugger;
+    const file = await filePreview(
+      props.file.name,
+      "root",
+      props.podName
+    ).catch((e) => console.error(e));
     props.setFile(await file.text());
   };
   const handleClick = () => {

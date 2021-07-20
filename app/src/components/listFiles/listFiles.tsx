@@ -1,24 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
-import { StoreContext } from "../../store/store";
-import CardGrid from "../cardGrid/cardGrid";
 import FileCard from "../cards/fileCard";
 import useStyles from "./listFilesStyles";
 export interface Props {
   password: string;
   files: any;
   setFile: any;
+  podName: any;
 }
 
 function ListFiles(props: Props) {
-  const { state, actions } = useContext(StoreContext);
   const { theme } = useContext(ThemeContext);
   const classes = useStyles({ ...props, ...theme });
-
+  useEffect(() => {
+    console.log(props.podName);
+  });
   return (
     <div className={classes.ListFiles}>
       {props.files.map((file) => (
-        <FileCard file={file} setFile={props.setFile}></FileCard>
+        <FileCard
+          podName={props.podName}
+          file={file}
+          setFile={props.setFile}
+        ></FileCard>
       ))}
     </div>
   );

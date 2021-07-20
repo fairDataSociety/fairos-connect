@@ -57,6 +57,7 @@ export const ListFilesComponent = (props: Props) => {
           password={props.password}
           files={props.files}
           setFile={props.setFile}
+          podName={props.podName}
         />
       </ThemeProvider>
     </StoreProvider>

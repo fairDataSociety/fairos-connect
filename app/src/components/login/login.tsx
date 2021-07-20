@@ -12,7 +12,7 @@ export interface Props {
   setFiles?: any;
   files?: any;
   setUploadRes?: any;
-  podName?: string;
+  podName?: any;
   className?: any;
   setPod?: any;
 }
@@ -42,19 +42,13 @@ function Login(props: Props) {
     }
   }
 
-  //add UseEffect when state changes to reload it and store it
-  useEffect(() => {
-    if (props) {
-      props.setUserPassword(password);
-    }
-  }, [state.userData]);
-
   async function onLogin() {
     await actions.userLogin({
       username,
       password,
       podName: "Home",
     });
+    props.setUserPassword(password);
     actions.getPods();
   }
 

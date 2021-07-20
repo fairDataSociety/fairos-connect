@@ -16,7 +16,7 @@ interface Payload {
   files?:any;
 }
 
-const host = "https://fairos.testeron.pro/v1/";
+const host = "https://fairos.fairdatasociety.org/v1/";
 // const host = process.env.npm_config_host;
 // const host = "http://localhost:9090";
 // const host ="https://api.fairos.io/v0/";

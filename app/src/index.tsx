@@ -10,6 +10,8 @@ import { ThemeProvider } from "./store/themeContext/themeContext";
 import UploadFile from "./components/uploadFile/uploadFile";
 import ListFiles from "./components/listFiles/listFiles";
 import LoadFiles from "./components/loadFiles/loadFiles";
+import ListAllPods from "./components/listAllPods/listAllPods";
+import OpenPod from "./components/openPod/openPod";
 // export * as services from "./store/services/fairOS";
 ReactDOM.render(<App />, document.getElementById("root"));
 
@@ -29,7 +31,20 @@ export const UploadFileComponent = (props: Props) => {
   return (
     <StoreProvider>
       <ThemeProvider>
-        <UploadFile file={props.file} setUploadRes={props.setUploadRes} />
+        <UploadFile
+          file={props.file}
+          setUploadRes={props.setUploadRes}
+          podName={props.podName}
+        />
+      </ThemeProvider>
+    </StoreProvider>
+  );
+};
+export const ListPodsComponent = (props: Props) => {
+  return (
+    <StoreProvider>
+      <ThemeProvider>
+        <ListAllPods setPod={props.setPod} />
       </ThemeProvider>
     </StoreProvider>
   );
@@ -51,7 +66,20 @@ export const LoadFilesComponent = (props: Props) => {
   return (
     <StoreProvider>
       <ThemeProvider>
-        <LoadFiles password={props.password} setFiles={props.setFiles} />
+        <LoadFiles
+          password={props.password}
+          setFiles={props.setFiles}
+          podName={props.podName}
+        />
+      </ThemeProvider>
+    </StoreProvider>
+  );
+};
+export const OpenPodComponent = (props: Props) => {
+  return (
+    <StoreProvider>
+      <ThemeProvider>
+        <OpenPod password={props.password} podName={props.podName} />
       </ThemeProvider>
     </StoreProvider>
   );

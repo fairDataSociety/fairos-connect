@@ -7,6 +7,7 @@ import ButtonPill from "../buttonPill/buttonPill";
 export interface Props {
   setFiles: any;
   password: any;
+  podName: any;
 }
 
 function LoadFiles(props: Props) {
@@ -17,9 +18,11 @@ function LoadFiles(props: Props) {
 
   async function getDirectory() {
     try {
+      console.log(props.podName);
       await actions.getDirectory({
         directory: "root",
         password: props.password,
+        podName: props.podName,
       });
     } catch (e) {
       console.log(e);

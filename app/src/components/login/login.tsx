@@ -14,6 +14,7 @@ export interface Props {
   setUploadRes?: any;
   podName?: string;
   className?: any;
+  setPod?: any;
 }
 
 function Login(props: Props) {
@@ -52,8 +53,9 @@ function Login(props: Props) {
     await actions.userLogin({
       username,
       password,
-      podName: "Fairdrive",
+      podName: "Home",
     });
+    actions.getPods();
   }
 
   return (

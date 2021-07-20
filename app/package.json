@@ -1,8 +1,8 @@
 {
-  "name": "fd-test-protocol",
+  "name": "fairdrive-protocol",
   "version": "0.0.1",
   "description": "Linum Labs Internal Boilerplate",
-  "author": "Kent Fourie",
+  "author": "Mustafa Mahmutovic",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",

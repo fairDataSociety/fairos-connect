@@ -16,8 +16,8 @@ function FileCard(props: Props) {
 
   const classes = useStyles({ ...props, ...theme });
   const downloadFile = async () => {
-    const file = await filePreview(props.file.name, "root", "Fairdrive").catch(
-      (e) => console.error(e)
+    const file = await filePreview(props.file.name, "root", "Home").catch((e) =>
+      console.error(e)
     );
     props.setFile(await file.text());
   };

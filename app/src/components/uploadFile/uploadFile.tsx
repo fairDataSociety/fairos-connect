@@ -8,6 +8,7 @@ import TextField from "../textField/textField";
 export interface Props {
   file: any;
   setUploadRes: any;
+  podName: any;
 }
 
 function ShareFile(props: Props) {
@@ -34,7 +35,7 @@ function ShareFile(props: Props) {
         file: props.file,
         filename: filename,
         directory: "root",
-        podName: "Fairdrive",
+        podName: props.podName,
       });
     } catch (e) {
       console.log(e);

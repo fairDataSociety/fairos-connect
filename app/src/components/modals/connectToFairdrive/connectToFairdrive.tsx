@@ -4,10 +4,12 @@ import { StoreContext } from "../../../store/store";
 import useStyles from "./connectToFairdriveStyles";
 import Modal from "../modal/modal";
 import TextField from "../../textField/textField";
+import { getPods, login } from "../../../store/services/fairOS";
 
 export interface Props {
   setUsername?: any;
   setPassword?: any;
+  setPods?: any;
 }
 
 function ConnectToFairdrive(props: Props) {
@@ -18,12 +20,12 @@ function ConnectToFairdrive(props: Props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   async function onLogin() {
-    actions.userLogin({
+    const res = await login({
       username,
       password,
-      podName: "Fairdrive",
     });
-    actions.getPods();
+    const podsRes = await getPods();
+
     props.setPassword(password);
   }
   return (

@@ -79,3 +79,11 @@ To create new folder inside your storage, import CreateNewFolder component and a
 `const [folderCreated, setFolderCreated] = useState(false);`
 
 ` <CreateNewFolder setResponse={setCreateFolderResponse} ></ListFilesComponent>`
+
+## List Pods
+
+To create new folder inside your storage, import CreateNewFolder component and add state for response when directory has been created
+
+`const [podName, setPod] = useState(null);`
+
+` <ListAllPods setPod={props.setPod} />`

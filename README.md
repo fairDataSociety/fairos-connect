@@ -60,7 +60,7 @@ Create state for files
 
 `const [files, setFiles] = useState(null)`
 
-`<LoadFilesComponent password={password}setFiles={setFiles}></LoadFilesComponent>`
+`<LoadFilesComponent password={password} setFiles={setFiles}></LoadFilesComponent>`
 
 This component will load files from pod and store it to your app state
 
@@ -82,8 +82,8 @@ To create new folder inside your storage, import CreateNewFolder component and a
 
 ## List Pods
 
-To create new folder inside your storage, import CreateNewFolder component and add state for response when directory has been created
+To get all pods from users account call upon this function. It returns array of pods associated with account
 
 `const [podName, setPod] = useState(null);`
 
-` <ListAllPods setPod={props.setPod} />`
+` <ListAllPods setPod={setPod} />`

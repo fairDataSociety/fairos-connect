@@ -87,6 +87,6 @@ To create new folder inside your storage, import CreateNewFolder component and a
 
 To get all pods from users account call upon this function. It returns array of pods associated with account
 
-`const [podName, setPod] = useState(null);`
+`const [pods, setPods] = useState(null);`
 
-` <ListAllPods setPod={setPod} />`
+` <ListAllPods setPod={setPods} />`

@@ -1,4 +1,5 @@
-# Fairdrive Protocol
+# Fairdrive Protocol - Reusable React Components
+Use these components to kick start your Fairdrive App.
 
 This is React component modal which will be used as a proxy for connecting on swarm network using FairOS and Fairdrive Protocol.
 ## Test package

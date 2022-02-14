@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 
 import Main from "./main/main";
 export default function MainWrapper() {

@@ -2,9 +2,7 @@ import axios from "axios";
 import qs from "querystring";
 import FileSaver from "file-saver";
 import generateMnemonic from "../helpers/utils";
-import urlPath from "../helpers/urlPath";
-import makeBlockie from "ethereum-blockies-base64";
-
+import urlPath from '../helpers/urlPath';
 interface Payload {
   username?: string;
   password?: string;
@@ -12,62 +10,60 @@ interface Payload {
   mnemonic?: string;
   podName?: string;
   podReference?: string;
-  file?: FileList;
+  file?: any;
   directory?: string;
-  files?: FileList;
-  path?: string
+  files?:any;
 }
 
-// const host = "https://fairos.fairdatasociety.org/v1/"
-const host = process.env.REACT_APP_FAIROSHOST;
-// const host = "https://fairos.testeron.pro/v1/";
+const host = "https://fairos.fairdatasociety.org/v1/";
+// const host = process.env.npm_config_host;
 // const host = "http://localhost:9090";
 // const host ="https://api.fairos.io/v0/";
-const podNameDefault = 'Home';
+const podNameDefault = "Fairdrive";
 
-export async function createAccount(
-  payload: Payload
-) {
-  //const {username, password, mnemonic} = payload
+export async function createAccount(payload: Payload) {
+  const {username, password, mnemonic} = payload
   try {
+
     const response = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'user/signup',
+      method: "POST",
+      url: "user/signup",
       data: JSON.stringify({
-        user_name: payload.username,
-        password: payload.password,
-        mnemonic: payload.mnemonic,
+        user_name: username,
+        password: password,
+        mnemonic: mnemonic,
       }),
-      headers: {
-        'Content-Type': 'application/json',
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    await createPod({ password: payload.password, podName: 'Home' });
-    // await createPod({ password: payload.password, podName: "Photos" });
+    await createPod({ password: password, podName: 'Home' });
+    await createPod({ password: password, podName: 'Consent' });
 
     return response;
   } catch (e) {
-    console.log('error on timeout', e);
+    console.log("error on timeout", e);
   }
 }
 
-export const login = async (
-  payload: Payload
-) => {
+
+
+export const login = async (payload: Payload) => {
   try {
-    const { username, password } = payload;
+   const {username, password} = payload;
+
     const response = await axios({
       baseURL: host,
-      url: 'user/login',
-      method: 'POST',
+      url: "user/login",
+      method: "POST",
       data: {
         user_name: username,
         password: password,
       },
-      headers: {
-        'Content-Type': 'application/json',
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
@@ -75,58 +71,54 @@ export const login = async (
 
     return { res: response };
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
-};
+}
 
-export const importUser = async (
-  payload: Payload
-) => {
+export const importUser = async( payload: Payload) =>{
   const response = await axios({
     baseURL: host,
-    method: 'POST',
-    url: 'user/import',
+    method: "POST",
+    url: "user/import",
     data: {
       user_name: payload.username,
       password: payload.password,
-      address: payload.address,
+      address: payload.address
     },
-    headers: {
-      'Content-Type': 'application/json',
+    headers:{
+      'Content-Type': 'application/json'
     },
     withCredentials: true,
   });
-  
   return response;
-};
-export const generateSeedPhrase = async (): Promise<string> => {
+}
+export const generateSeedPhrase = async() =>{
   // TODO get seed phrase
-  console.log('Creating seed phrase...');
-  const res = await generateMnemonic();
-  return res;
-};
+  console.log("Creating seed phrase...")
+  let res = await generateMnemonic()
+  return res
+}
 
 export const logOut = async () => {
   try {
     const response = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'user/logout',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      url: "user/logout",
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
+
     return response;
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
-};
+}
 
-export const userLoggedIn = async (
-  username: string
-) => {
+
+export const userLoggedIn = async (username: string) => {
   try {
     const requestBody = {
       user_name: username,
@@ -134,25 +126,23 @@ export const userLoggedIn = async (
 
     const response = await axios({
       baseURL: host,
-      method: 'GET',
-      url: 'user/isloggedin',
+      method: "GET",
+      url: "user/isloggedin",
       data: requestBody,
       params: qs.stringify({ user_name: username }, 'brackets'),
-      headers: {
-        'Content-Type': 'application/json',
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
-    return response;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
 
-export const isUsernamePresent = async (
-  username: string
-) => {
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const isUsernamePresent = async (username: string) => {
   try {
     const requestBody = {
       user_name: username,
@@ -160,613 +150,500 @@ export const isUsernamePresent = async (
 
     const response = await axios({
       baseURL: host,
-      method: 'GET',
-      url: 'user/present',
+      method: "GET",
+      url: "user/present",
+      data: requestBody,
       params: qs.stringify(requestBody, 'brackets'),
-      headers: {
-        'Content-Type': 'application/json',
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
-    return response;
+
+    return response.data;
   } catch (error) {
-    return Promise.reject(error);
+    return error;
   }
-};
+}
 
 export const exportUser = async () => {
   try {
     const response = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'user/export',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      url: "user/export",
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
+
     return response;
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
-};
+}
 
-export const deleteUser = async (
-  payload: Payload
-) => {
+
+export const deleteUser = async (payload: Payload) => {
   try {
     const response = await axios({
       baseURL: host,
-      method: 'DELETE',
-      url: 'user/delete',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "DELETE",
+      url: "user/delete",
+      headers:{
+        'Content-Type': 'application/json'
       },
       data: {
-        password: payload.password,
+        password: payload.password
       },
       withCredentials: true,
     });
-    
+
     return response;
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
-};
+}
 
 export const userStats = async () => {
   try {
     const response = await axios({
       baseURL: host,
-      method: 'GET',
-      url: 'user/stat',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "GET",
+      url: "user/stat",
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    const imageSrc = makeBlockie(response.data.reference);
-    response.data.avatar = imageSrc;
-    
+
     return response;
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
-};
+}
 
-export const createPod = async (payload: {
-  password: string;
-  podName: string;
-}): Promise<boolean> => {
-  try {
-    const { password, podName } = payload;
-    await axios({
+
+export const createPod = async(payload: any) =>{
+  try{
+      const{password, podName} = payload;
+      await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'pod/new',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      url: "pod/new",
+      headers:{
+        'Content-Type': 'application/json'
       },
-      data: { password: password, pod_name: podName },
+      data: {password: password,pod_name: podName },
       withCredentials: true,
     });
     return true;
-  } catch (err) {
+  } catch(err){
     return false;
   }
-};
+}
 
-export const closePod = async (payload: {
-  password: string;
-  podName: string;
-}) => {
-  try {
-    const { password, podName } = payload;
-    const closePod = await axios({
+export const closePod = async(payload: any) =>{
+  try{
+      const {password, podName} = payload
+      const closePod = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'pod/close',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      url: "pod/close",
+      headers:{
+        'Content-Type': 'application/json'
       },
-      data: { pod_name: podName, password: password },
+      data: {pod_name: podName, password: password },
       withCredentials: true,
     });
-    
     return closePod;
-  } catch (err) {
+  } catch(err){
     return err;
   }
-};
+}
 
-export const openPod = async (payload: {
-  password: string;
-  podName: string;
-}) => {
-  try {
-    const { password, podName } = payload;
-    const openPod = await axios({
+export const openPod = async(payload: any) =>{
+  try{
+    const {password, podName } = payload;
+      const openPod = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'pod/open',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      url: "pod/open",
+      headers:{
+        'Content-Type': 'application/json'
       },
-      data: {
-        pod_name:
-          podName === undefined || podName === null ? podNameDefault : podName,
-        password: password,
-      },
+      data: {pod_name: podName === undefined || podName === null? podNameDefault: podName, password: password },
       withCredentials: true,
     });
-    
     return openPod;
-  } catch (err) {
+  } catch(err){
     return err;
   }
-};
+}
 
-export const syncPod = async () => {
-  try {
-    const syncPodRes = await axios({
+export const syncPod = async(password: string, podName: string) =>{
+  try{
+      const syncPodRes = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'pod/sync',
-      headers: {
-        'Content-Type': 'application/json',
+      method: "POST",
+      url: "pod/sync",
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
     return syncPodRes;
-  } catch (err) {
+  } catch(err){
     return err;
   }
-};
-export const sharePod = async (
-  password: string,
-  podName: string
-) => {
-  try {
-    const sharePodRes = await axios({
-      baseURL: host,
-      method: 'POST',
-      url: 'pod/share',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: { pod_name: podName, password: password },
-      withCredentials: true,
-    });
-    
-    return sharePodRes?.data?.pod_sharing_reference;
-  } catch (err) {
-    return err;
-  }
-};
-// eslint-disable-next-line
-export const deletePod = async (podName: string) => {
-  try {
-    const deletePodRes = await axios({
-      baseURL: host,
-      method: 'DELETE',
-      url: 'pod/delete',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: { pod_name: podName },
-      withCredentials: true,
-    });
-    
-    return deletePodRes;
-  } catch (err) {
-    return err;
-  }
-};
-
-export const getPods = async () => {
-  const podResult = await axios({
-    baseURL: host,
-    method: 'GET',
-    url: 'pod/ls',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  });
-  
-  return podResult;
-};
-
-export const getPodStats = async (
-  payload: Payload
-) => {
-  try {
-    const deletePodRes = await axios({
-      baseURL: host,
-      method: 'GET',
-      url: 'pod/stat',
-      params: qs.stringify({ pod_name: payload.podName }, 'brackets'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    });
-    
-    return deletePodRes;
-  } catch (err) {
-    return err;
-  }
-};
-export const showReceivedPodInfo = async (
-  payload: Payload
-) => {
-  const podResult = await axios({
-    baseURL: host,
-    method: 'GET',
-    url: 'pod/receiveinfo',
-    params: qs.stringify({ reference: payload.podReference }, 'brackets'),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-  });
-  
-  return podResult;
-};
-
-interface ReceivePayload {
-  podReference: string;
-  pod_name: string;
 }
-export const receivePod = async (
-  payload: ReceivePayload
-) => {
-  const podResult = await axios({
-    baseURL: host,
-    method: 'GET',
-    url: 'pod/receive',
-    params: { reference: payload.podReference, pod_name: payload.pod_name },
-    data: { reference: payload.podReference, pod_name: payload.pod_name },
-    headers: {
-      "Content-Type": "application/json",
-    },
-    withCredentials: true,
-  });
-  
-  return podResult;
-};
-
-function makeid(length) {
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+export const sharePod = async(password: string, podName: string) =>{
+  try{
+      const sharePodRes = await axios({
+      baseURL: host,
+      method: "POST",
+      url: "pod/share",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      data: {pod_name: podName, password: password },
+      withCredentials: true,
+    });
+    return sharePodRes;
+  } catch(err){
+    return err;
   }
-  return result;
 }
 
-export const fileUpload = (
-  payload: Payload,
-  onUploadProgress: (request: string, progressEvent, cancelFn) => void
-) => {
-  const requestId = makeid(6);
+export const deletePod = async(password: string, podName: string) =>{
+  try{
+      const deletePodRes = await axios({
+      baseURL: host,
+      method: "DELETE",
+      url: "pod/delete",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      data: {pod_name: podName},
+      withCredentials: true,
+    });
+    return deletePodRes;
+  } catch(err){
+    return err;
+  }
+}
 
-  const { files, directory, podName } = payload;
-  // const newPath = writePath(path);
-  let writePath = '';
-  if (directory === 'root') {
-    writePath = '/';
+export const getPods = async() => {
+  const podResult = await axios({
+    baseURL: host,
+    method: "GET",
+    url: "pod/ls",
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+  });
+  return podResult;
+}
+
+export const getPodStats = async(payload:Payload) => {
+  try{
+    const deletePodRes = await axios({
+    baseURL: host,
+    method: "GET",
+    url: "pod/stat",
+    params: qs.stringify({pod_name: payload.podName}, "brackets"),
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+  });
+  return deletePodRes;
+} catch(err){
+  return err;
+}
+}
+export const showReceivedPodInfo = async(payload: Payload) =>{
+  const podResult = await axios({
+    baseURL: host,
+    method: "GET",
+    url: "pod/receiveinfo",
+    params:qs.stringify({reference:payload.podReference},"brackets"),
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+  });
+  return podResult;
+}
+
+
+export const receivePod = async(payload: Payload) =>{
+  const podResult = await axios({
+    baseURL: host,
+    method: "GET",
+    url: "pod/receive",
+    params:qs.stringify({reference:payload.podReference},"brackets"),
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true,
+  });
+  return podResult;
+}
+
+
+
+export const fileUpload = async (payload: any) => {
+  let formData = new FormData();
+  var file = new File([payload.file], payload.filename);
+  let writePath = "";
+  if (payload.directory === "root") {
+    writePath = "/";
   } else {
-    writePath = '/' + urlPath(directory);
+    writePath = "/" + urlPath(payload.directory);
   }
-  const formData = new FormData();
-  Array.from(files).forEach((file) => {
-    formData.append("files", file);
-  });
 
+  formData.append("files", file);
+  
   formData.append("dir_path", writePath);
   formData.append("block_size", "64Mb");
-  formData.append("pod_name", podName);
+  formData.append("pod_name", payload.podName)
 
-  const cancelFn = axios.CancelToken.source();
-
-  const uploadRequest = axios({
+  await axios({
     baseURL: host,
-
     method: "POST",
     url: "file/upload",
-    onUploadProgress: (progressEvent) => {
-      onUploadProgress(requestId, progressEvent, cancelFn);
-    },
     data: formData,
-    cancelToken: cancelFn.token,
-    headers: {
-      'Content-type': 'multiple/form-data',
+    headers:{
+      "Content-type":"multiple/form-data"
     },
     withCredentials: true,
   });
-  
-  return {
-    uploadRequest,
-    cancelFn,
-    requestId,
-  };
-};
 
-export const fileDownload = async (
-  filename: string,
-  directory: string,
-  podName: string
-) => {
-  try {
-    let writePath = '';
-    if (directory === 'root') {
-      writePath = '/';
-    } else {
-      writePath = '/' + urlPath(directory) + '/';
-    }
-    const formData = new FormData();
-    formData.append('file_path', writePath + filename);
-    formData.append('pod_name', podName);
+  return true;
+}
 
-    const downloadFile = await axios({
-      baseURL: host,
-      method: 'POST',
-      url: 'file/download',
-      data: formData,
-      responseType: 'blob',
-      withCredentials: true,
-    });
-
-    FileSaver.saveAs(downloadFile.data, filename);
-    
-    //const blob = new Blob(downloadFile.data)
-    return downloadFile;
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export const filePreview = async (
-  file: string,
-  directory: string,
-  podName: string
-) => {
+export const fileDownload = async ( filename:any, directory: string, podName: string) => {
   try {
     let writePath = "";
     if (directory === "root") {
       writePath = "/";
     } else {
-      writePath = '/' + urlPath(directory) + '/';
+      writePath = "/" + urlPath(directory)+"/";
     }
-
     const formData = new FormData();
-    formData.append('file_path', writePath + file);
-    formData.append('pod_name', podName);
+    formData.append("file_path", writePath+filename);
+    formData.append("pod_name", podName)
+
 
     const downloadFile = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'file/download',
+      method: "POST",
+      url: "file/download",
       data: formData,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      responseType: 'blob',
+      responseType: "blob",
       withCredentials: true,
     });
-    
+
+    FileSaver.saveAs(downloadFile.data, filename);
+
+    //const blob = new Blob(downloadFile.data)
+    return downloadFile;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const filePreview = async (file:any, directory: string, podName) => {
+  try {
+    console.log(directory);
+    let writePath = "";
+    if (directory === "root") {
+      writePath = "/";
+    } else {
+      writePath = "/" + urlPath(directory) + "/";
+    }
+
+    const formData = new FormData();
+    formData.append("file_path", writePath + file);
+    formData.append("pod_name", podName);
+
+    const downloadFile = await axios({
+      baseURL: host,
+      method: "POST",
+      url: "file/download",
+      data: formData,
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      responseType: "blob",
+      withCredentials: true,
+    });
     return downloadFile.data;
   } catch (error) {
-    return Promise.reject(error);
+    throw error;
   }
-};
+}
 
-export const getDirectory = async (
-  payload: Payload
-) => {
-  const { directory, podName } = payload;
+export const getDirectory = async (payload: Payload) => {
+  const {directory, podName} = payload;
   try {
-    // const openPod = await axios({
-    //   baseURL: host,
-    //   method: "POST",
-    //   url: "pod/open",
-    //   // add pod as function parameter
-    //   data: qs.stringify({ password: password, pod: "Fairdrive"}),
-    //   withCredentials: true,
-    // });
-    const pod_name =
-      podName === undefined || podName === null ? podNameDefault : podName;
-    let data = { dir_path: '', pod_name: pod_name };
+    const pod_name = podName === undefined || podName === null? podNameDefault: podName
+    let data = { dir_path: "", pod_name: pod_name};
 
-    if (directory === 'root') {
+    if (directory === "root") {
       data = {
-        dir_path: '/',
-        pod_name: pod_name,
+        dir_path: "/",
+        pod_name: pod_name
       };
     } else {
       data = {
-        dir_path: '/' + directory,
-        pod_name: pod_name,
+        dir_path: "/" + directory,
+        pod_name: pod_name
       };
     }
     const response = await axios({
       baseURL: host,
-      method: 'GET',
-      url: 'dir/ls',
-      params: data,
-      headers: {
-        'Content-Type': 'application/json',
+      method: "GET",
+      url: "dir/ls",
+      params:data,
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
+
     return response.data;
   } catch (error) {
-    return Promise.reject(error);
-  }
-};
-
-export async function createDirectory(
-  directory: string,
-  directoryName: string,
-  podName: string
-): Promise<boolean> {
-  // Dir = "/" + path + "/"
-  let data = { dir_path: '' };
-
-  if (directory === 'root') {
-    data = {
-      dir_path: '/' + directoryName,
-    };
-  } else {
-    data = {
-      dir_path: '/' + directory + '/' + directoryName,
-    };
-  }
-  try {
-    // eslint-disable-next-line
-    const createDirectory = await axios({
-      baseURL: host,
-      method: 'POST',
-      url: 'dir/mkdir',
-      data: JSON.stringify({
-        dir_path: data.dir_path,
-        dir_name: directoryName,
-        pod_name: podName,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    });
-
-    return true;
-  } catch (error) {
-    return error;
+    throw error;
   }
 }
 
-export const deleteFile = async (payload: {
-  file_name: string;
-  podName: string;
-  path: string;
-}) => {
-  try {
-    const { file_name, podName, path } = payload;
+function dataURLtoFile(dataurl:any, filename: string) {
+  var arr = dataurl.split(","),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
 
-    await axios({
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], filename, { type: mime });
+}
+
+export const storeAvatar = async (avatar:any) => {
+  try {
+    //Usage example:
+    var file = dataURLtoFile(avatar, "avatar.jpg");
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    const response = await axios({
       baseURL: host,
-      method: 'DELETE',
-      url: 'file/delete',
-      data: {
-        pod_name: podName,
-        file_path:`${path}${file_name}`
-      },
-      headers: {
-        "Content-Type": "application/json",
+      method: "POST",
+      url: "user/avatar",
+      data: formData,
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (e) {
+    console.log("error on timeout", e);
+  }
+}
+export async function createDirectory(directory: string,directoryName: string, podName: string) {
+  // Dir = "/" + path + "/"
+
+  let data = { dir_path: ""};
+
+  if (directory === "root") {
+    data = {
+      dir_path: "/"+directoryName,
+    };
+  } else {
+    data = {
+      dir_path: "/" + directory,
+    };
+  }
+  try {
+     await axios({
+      baseURL: host,
+      method: "POST",
+      url: "dir/mkdir",
+      data: JSON.stringify({ dir_path:data.dir_path,dir_name: directoryName, pod_name:podName }),
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
 
     return true;
-  } catch (error) {
-    return error;
-  }
-};
+  } catch (error) {}
+}
 
-export const deleteFolder = async (payload: Payload) => {
+
+
+
+
+export const deleteFile = async (fileName: string) => {
   try {
-    // eslint-disable-next-line
-    const {podName, path} = payload
- 
     await axios({
       baseURL: host,
       method: "DELETE",
-      url: "dir/rmdir",
+      url: "file/delete",
       data: {
-        pod_name: podName,
-        dir_path: path
+        file: fileName,
       },
-      headers: {
-        'Content-Type': 'application/json',
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
-    return true;
-  } catch (error) {
-    return error;
-  }
-};
 
-export const shareFile = async (
-  fileName: string,
-  path_file: string,
-  podName: string
-) => {
+    return true;
+  } catch (error) {}
+}
+
+export const shareFile = async (fileName: string) => {
   try {
     const shareFileResult = await axios({
       baseURL: host,
-      method: 'POST',
-      url: 'file/share',
+      method: "POST",
+      url: "file/share",
       data: {
         file: fileName,
-        dest_user: 'anon',
-        file_path: path_file + fileName,
-        pod_name: podName,
+        to: "anon",
       },
-      headers: {
-        'Content-Type': 'application/json',
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
 
-    return shareFileResult?.data?.file_sharing_reference;
-  } catch (error) {
-    return error;
-  }
-};
+    return shareFileResult.data.sharing_reference;
+  } catch (error) {}
+}
 
-export const receiveFileInfo = async (
-  reference: string,
-  podName: string,
-  directory: string
-) => {
+
+export const receiveFileInfo = async (reference: string) => {
   try {
-    let data = { dir_path: '', pod_name: podName, sharing_ref: reference };
-    if (directory === 'root') {
-      data = {
-        dir_path: '/',
-        pod_name: podName,
-        sharing_ref: reference,
-      };
-    } else {
-      data = {
-        dir_path: '/' + directory,
-        pod_name: podName,
-        sharing_ref: reference,
-      };
-    }
     const shareFileInfoResult = await axios({
       baseURL: host,
-      method: 'GET',
-      url: 'file/receive',
-      params: data,
-      data: data,
-      headers: {
-        "Content-Type": "application/json",
+      method: "POST",
+      url: "file/receiveinfo",
+      data: {
+        ref: reference,
+      },
+      headers:{
+        'Content-Type': 'application/json'
       },
       withCredentials: true,
     });
-    
+
     return shareFileInfoResult.data;
-  } catch (error) {
-    return error;
-  }
-};
+  } catch (error) {}
+}

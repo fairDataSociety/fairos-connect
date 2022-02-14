@@ -1,7 +1,4 @@
-import React, { useContext } from "react";
-import { ThemeContext } from "../../store/themeContext/themeContext";
-import { StoreContext } from "../../store/store";
-import useStyles from "./openPodStyles";
+import React from "react";
 import { openPod } from "../../store/services/fairOS";
 
 export interface Props {
@@ -10,10 +7,6 @@ export interface Props {
 }
 
 function BoilerPlate(props: Props) {
-  const { state, actions } = useContext(StoreContext);
-  const { theme } = useContext(ThemeContext);
-
-  const classes = useStyles({ ...props, ...theme });
   const { password, podName } = props;
   return (
     <label

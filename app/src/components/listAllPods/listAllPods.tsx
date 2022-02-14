@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ThemeContext } from "../../store/themeContext/themeContext";
-import { StoreContext } from "../../store/store";
 import useStyles from "./listAllPodsStyles";
 import { getPods } from "../../store/services/fairOS";
 
@@ -9,7 +8,6 @@ export interface Props {
 }
 
 function ListAllPods(props: Props) {
-  const { state, actions } = useContext(StoreContext);
   const { theme } = useContext(ThemeContext);
 
   const classes = useStyles({ ...props, ...theme });

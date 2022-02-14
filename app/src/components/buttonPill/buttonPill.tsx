@@ -12,7 +12,7 @@ export interface Props {
 }
 
 function ButtonPill(props: Props) {
-  const { state, actions } = useContext(StoreContext);
+  const { state } = useContext(StoreContext);
   const { theme } = useContext(ThemeContext);
   const { text, clickFunction } = props;
   const classes = useStyles({ ...props, ...theme });
@@ -20,7 +20,7 @@ function ButtonPill(props: Props) {
     if (props.setFiles) {
       props.setFiles(state.entries);
     }
-  }, [state.entries]);
+  }, [state.entries, props]);
   return (
     <div className={classes.button} onClick={clickFunction}>
       {text}

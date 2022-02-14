@@ -1,13 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardWrapper from "./cardWrapper/cardWrapper";
 import CardHeader from "./cardHeader/cardHeader";
 import CardBody from "./cardBody/cardBody";
 import { InfoIcon, Folder } from "../../components/icons/icons";
 import prettyBytes from "pretty-bytes";
 import moment from "moment";
-import { StoreContext } from "../../store/store";
-import { ThemeContext } from "../../store/themeContext/themeContext";
-import useStyles from "./fileCardStyles";
 import { filePreview } from "../../store/services/fairOS";
 type Sizes = "small" | "regular" | "big";
 export interface Props {
@@ -20,27 +17,12 @@ export interface Props {
 
 function FileCard(props: Props) {
   const { file } = props;
-  const { state, actions } = useContext(StoreContext);
-  const { theme } = useContext(ThemeContext);
-  const classes = useStyles({ ...props, ...theme });
-  // eslint-disable-next-line
-
-  async function onFileClick() {
-    if (file.content_type === "inode/directory") {
-      const newDirectory =
-        state.directory !== "root"
-          ? state.directory + "/" + file.name
-          : file.name;
-      actions.setDirectory(newDirectory);
-    }
-  }
 
   const [fileSize, setFileSize] = useState("");
   const [fileCreateDate, setFileCreateDate] = useState("");
   // eslint-disable-next-line
   const [fileModDate, setFileModDate] = useState("");
   const [Icon, setIcon] = useState(null);
-  const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
     file.content_type === "inode/directory"
@@ -66,9 +48,7 @@ function FileCard(props: Props) {
     ).catch((e) => console.error(e));
     props.setFile(await file.text());
   };
-  const handleClick = () => {
-    setDropdown(!dropdown);
-  };
+
 
   return (
     <CardWrapper onFileClick={downloadFile}>

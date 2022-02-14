@@ -11,7 +11,7 @@ export interface Props {
 
 function CardHeader(props: Props) {
   const { theme } = useContext(ThemeContext);
-  const { Icon, heading } = props;
+  const {  heading } = props;
   const classes = useStyles({ ...props, ...theme });
 
   return (

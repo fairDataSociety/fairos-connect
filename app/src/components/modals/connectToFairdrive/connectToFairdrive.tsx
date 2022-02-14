@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../../store/themeContext/themeContext";
-import { StoreContext } from "../../../store/store";
 import useStyles from "./connectToFairdriveStyles";
 import Modal from "../modal/modal";
 import TextField from "../../textField/textField";
@@ -13,18 +12,17 @@ export interface Props {
 }
 
 function ConnectToFairdrive(props: Props) {
-  const { state, actions } = useContext(StoreContext);
   const { theme } = useContext(ThemeContext);
 
   const classes = useStyles({ ...props, ...theme });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   async function onLogin() {
-    const res = await login({
+    await login({
       username,
       password,
     });
-    const podsRes = await getPods();
+    await getPods();
 
     props.setPassword(password);
   }

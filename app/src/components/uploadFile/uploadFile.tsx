@@ -17,17 +17,10 @@ function ShareFile(props: Props) {
   const [filename, setFilename] = useState("");
 
   const classes = useStyles({ ...props, ...theme });
-  const handleSetFilename = (e: any) => {
-    setFilename(e.target.value);
-  };
-  function handleSubmit(e: any) {
-    if (e.charCode === 13) {
-      shareFile();
-    }
-  }
+  
   useEffect(() => {
     props.setUploadRes(state.fileUploaded);
-  }, [state.fileUploaded]);
+  }, [state.fileUploaded, props]);
 
   const shareFile = async () => {
     try {

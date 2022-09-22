@@ -20,6 +20,7 @@ interface Payload {
 
 // const host = "https://fairos.fairdatasociety.org/v1/"
 const host = process.env.REACT_APP_FAIROSHOST;
+const hostLogin = process.env.REACT_APP_FAIROSHOST_LOGIN;
 // const host = "https://fairos.testeron.pro/v1/";
 // const host = "http://localhost:9090";
 // const host ="https://api.fairos.io/v0/";
@@ -59,7 +60,7 @@ export const login = async (
   try {
     const { username, password } = payload;
     const response = await axios({
-      baseURL: host,
+      baseURL: hostLogin,
       url: 'user/login',
       method: 'POST',
       data: {

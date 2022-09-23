@@ -20,6 +20,7 @@
     "babel-eslint": "^10.0.3",
     "babel-runtime": "^6.26.0",
     "cross-env": "^7.0.2",
+    "ethereum-blockies-base64": "^1.0.2",
     "ethers": "^5.4.1",
     "file-saver": "^2.0.5",
     "fortmatic": "^2.2.1",
@@ -66,7 +67,6 @@
   "files": [
     "dist"
   ],
-  "devDependencies": {},
   "peerDependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

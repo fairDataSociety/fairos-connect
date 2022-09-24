@@ -1,7 +1,7 @@
 {
-  "name": "fd-t-p",
+  "name": "@fairdatasociety/fdp-connect",
   "version": "0.0.3",
-  "description": "Linum Labs Internal Boilerplate",
+  "description": "Fairos React Connect",
   "author": "Mustafa Mahmutovic",
   "license": "MIT",
   "main": "dist/index.js",

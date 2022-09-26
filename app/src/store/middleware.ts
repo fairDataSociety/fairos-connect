@@ -50,6 +50,7 @@ export const applyMiddleware = (dispatch) => (action) => {
           })
         );
     case types.SEND_FILE.SEND_FILE_REQUEST:
+      // @ts-ignore
       return fileUpload(action.payload).then((res) => {
         dispatch({
           type: types.SEND_FILE.FILE_SENT_SUCCESS,

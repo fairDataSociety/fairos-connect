@@ -100,6 +100,7 @@ export const generateSeedPhrase = async (): Promise<string> => {
   // TODO get seed phrase
   console.log("Creating seed phrase...");
   const res = await generateMnemonic();
+  // @ts-ignore
   return res;
 };
 

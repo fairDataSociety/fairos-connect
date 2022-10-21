@@ -439,13 +439,20 @@ export const fileUpload = (
 ) => {
   const requestId = makeid(6);
 
-  const { files, directory, podName } = payload;
+  const { files, file, directory, podName } = payload;
   // const newPath = writePath(path);
   let writePath = "";
   if (directory === "root") {
     writePath = "/";
   } else {
     writePath = "/" + urlPath(directory);
+  }
+
+  let items = []
+  if (files && files.length > 0) {
+    items = [...Array.from(files)]
+  } else {
+    items = [file]
   }
   const formData = new FormData();
   Array.from(files).forEach((file) => {

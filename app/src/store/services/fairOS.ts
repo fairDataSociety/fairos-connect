@@ -455,7 +455,7 @@ export const fileUpload = (
     items = [file]
   }
   const formData = new FormData();
-  Array.from(files).forEach((file) => {
+  items.forEach((file) => {
     formData.append("files", file);
   });
 

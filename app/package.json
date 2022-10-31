@@ -2,7 +2,7 @@
   "name": "@fairdatasociety/fdp-connect",
   "version": "0.0.4",
   "description": "Fairos React Connect",
-  "author": "Mustafa Mahmutovic",
+  "author": "Mustafa Mahmutovic, Rogelio Morrell",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",

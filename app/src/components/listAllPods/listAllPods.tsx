@@ -18,7 +18,7 @@ function ListAllPods(props: Props) {
       className={classes.podItem}
       onClick={async () => {
         const res = await getPods();
-        props.setPod(res.data.pod_name);
+        props.setPod(res.data.pods);
       }}
     >
       List pods

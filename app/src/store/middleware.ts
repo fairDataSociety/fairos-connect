@@ -1,5 +1,14 @@
 import types from "./actionTypes";
-import { login, fileUpload, getDirectory, generateSeedPhrase, createAccount, getPods, openPod, logOut } from "../store/services/fairOS";
+import {
+  login,
+  fileUpload,
+  getDirectory,
+  generateSeedPhrase,
+  createAccount,
+  getPods,
+  openPod,
+  logOut,
+} from "../store/services/fairOS";
 
 export const applyMiddleware = (dispatch) => (action) => {
   switch (action.type) {
@@ -13,7 +22,7 @@ export const applyMiddleware = (dispatch) => (action) => {
           dispatch({
             type: types.SET_SYSTEM,
             payload: action.payload,
-          })
+          });
         })
         .catch((err) =>
           dispatch({
@@ -51,12 +60,13 @@ export const applyMiddleware = (dispatch) => (action) => {
         );
     case types.SEND_FILE.SEND_FILE_REQUEST:
       // @ts-ignore
-      return fileUpload(action.payload).then((res) => {
-        dispatch({
-          type: types.SEND_FILE.FILE_SENT_SUCCESS,
-          payload: res,
-        });
-      })
+      return fileUpload(action.payload)
+        .uploadRequest.then((res) => {
+          dispatch({
+            type: types.SEND_FILE.FILE_SENT_SUCCESS,
+            payload: res,
+          });
+        })
         .catch((err) =>
           dispatch({
             type: types.SEND_FILE.SENDING_FILE_FAILED,
@@ -69,43 +79,49 @@ export const applyMiddleware = (dispatch) => (action) => {
           type: types.GET_DIRECTORY.GET_DIRECTORY_SUCCESS,
           payload: res,
         });
-      })
+      });
     case types.SEED_PHRASE.SEED_PHRASE_REQUEST:
-      return generateSeedPhrase().then((res) => {
-        dispatch({
-          type: types.SEED_PHRASE.SEED_PHRASE_SUCCESS,
-          payload: res,
-        });
-      }).catch((err) =>
-        dispatch({
-          type: types.SEED_PHRASE.SEED_PHRASE_FAILED,
-          payload: err.response,
+      return generateSeedPhrase()
+        .then((res) => {
+          dispatch({
+            type: types.SEED_PHRASE.SEED_PHRASE_SUCCESS,
+            payload: res,
+          });
         })
-      );
+        .catch((err) =>
+          dispatch({
+            type: types.SEED_PHRASE.SEED_PHRASE_FAILED,
+            payload: err.response,
+          })
+        );
     case types.GET_PODS.GET_PODS_REQUEST:
-      return getPods().then((res) => {
-        dispatch({
-          type: types.GET_PODS.GET_PODS_SUCCESS,
-          payload: res,
-        });
-      }).catch((err) =>
-        dispatch({
-          type: types.GET_PODS.GET_PODS_FAIL,
-          payload: err.response,
+      return getPods()
+        .then((res) => {
+          dispatch({
+            type: types.GET_PODS.GET_PODS_SUCCESS,
+            payload: res,
+          });
         })
-      );
+        .catch((err) =>
+          dispatch({
+            type: types.GET_PODS.GET_PODS_FAIL,
+            payload: err.response,
+          })
+        );
     case types.OPEN_POD.OPEN_POD_REQUEST:
-      return openPod(action.payload).then((res) => {
-        dispatch({
-          type: types.OPEN_POD.OPEN_POD_SUCCESS,
-          payload: res,
-        });
-      }).catch((err) =>
-        dispatch({
-          type: types.OPEN_POD.OPEN_POD_FAIL,
-          payload: err.response,
+      return openPod(action.payload)
+        .then((res) => {
+          dispatch({
+            type: types.OPEN_POD.OPEN_POD_SUCCESS,
+            payload: res,
+          });
         })
-      );
+        .catch((err) =>
+          dispatch({
+            type: types.OPEN_POD.OPEN_POD_FAIL,
+            payload: err.response,
+          })
+        );
     default:
       dispatch(action);
   }

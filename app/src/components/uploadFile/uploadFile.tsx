@@ -9,6 +9,8 @@ export interface Props {
   file: any;
   setUploadRes: any;
   podName: any;
+  onUploadComplete?: () => void;
+  onError?: (error: unknown) => void;
 }
 
 function ShareFile(props: Props) {
@@ -30,6 +32,8 @@ function ShareFile(props: Props) {
   }, [state.fileUploaded]);
 
   const shareFile = async () => {
+    const { onUploadComplete, onError } = props;
+
     try {
       await actions.uploadFile({
         file: props.file,
@@ -37,8 +41,14 @@ function ShareFile(props: Props) {
         directory: "root",
         podName: props.podName,
       });
+      if (onUploadComplete) {
+        onUploadComplete();
+      }
     } catch (e) {
       console.log(e);
+      if (onError) {
+        onError(e);
+      }
     }
   };
   return (

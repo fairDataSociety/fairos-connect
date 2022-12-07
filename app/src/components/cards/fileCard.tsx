@@ -57,8 +57,6 @@ function FileCard(props: Props) {
     }
   }, [file]);
   const downloadFile = async () => {
-    console.log(props.podName);
-    debugger;
     const file = await filePreview(
       props.file.name,
       "root",

@@ -35,6 +35,8 @@ export const UploadFileComponent = (props: Props) => {
           file={props.file}
           setUploadRes={props.setUploadRes}
           podName={props.podName}
+          onUploadComplete={props.onComplete}
+          onError={props.onError}
         />
       </ThemeProvider>
     </StoreProvider>

@@ -15,6 +15,8 @@ export interface Props {
   podName?: any;
   className?: any;
   setPod?: any;
+  onComplete?: any;
+  onError?: any;
 }
 
 function Login(props: Props) {

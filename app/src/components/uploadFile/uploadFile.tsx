@@ -36,7 +36,7 @@ function ShareFile(props: Props) {
 
     try {
       await actions.uploadFile({
-        file: props.file,
+        file: new File([props.file], filename),
         filename: filename,
         directory: "root",
         podName: props.podName,

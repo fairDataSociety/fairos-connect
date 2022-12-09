@@ -18,7 +18,6 @@ function LoadFiles(props: Props) {
 
   async function getDirectory() {
     try {
-      console.log(props.podName);
       await actions.getDirectory({
         directory: "root",
         password: props.password,

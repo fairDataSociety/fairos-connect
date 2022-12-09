@@ -26,7 +26,7 @@ function FileCard(props: Props) {
   // eslint-disable-next-line
 
   async function onFileClick() {
-    if (file.content_type === "inode/directory") {
+    if (file.contentType === "inode/directory") {
       const newDirectory =
         state.directory !== "root"
           ? state.directory + "/" + file.name
@@ -43,16 +43,16 @@ function FileCard(props: Props) {
   const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
-    file.content_type === "inode/directory"
+    file.contentType === "inode/directory"
       ? setIcon(Folder)
       : setIcon(InfoIcon);
     if (file.size) {
       setFileSize(prettyBytes(parseInt(file.size)));
       setFileCreateDate(
-        moment.unix(file.creation_time).format("DD/MM/YYYY HH:mm:ss")
+        moment.unix(file.creationTime).format("DD/MM/YYYY HH:mm:ss")
       );
       setFileModDate(
-        moment.unix(file.modification_time).format("DD/MM/YYYY HH:mm:ss")
+        moment.unix(file.modificationTime).format("DD/MM/YYYY HH:mm:ss")
       );
     }
   }, [file]);
